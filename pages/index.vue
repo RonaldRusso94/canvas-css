@@ -1,15 +1,13 @@
 <template>
   <div
-    class="
-      flex flex-col
-      justify-center
-      items-center
-      min-h-screen
-      bg-gray-400
-      relative
-    "
+    class="flex flex-col justify-center items-center min-h-screen bg-gray-400"
   >
-    <canvas ref="canvas" width="600" height="600" class="bg-white"></canvas>
+    <canvas
+      ref="canvas"
+      width="600"
+      height="600"
+      class="bg-white shadow-lg rounded"
+    ></canvas>
   </div>
 </template>
 
