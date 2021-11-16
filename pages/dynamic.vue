@@ -16,21 +16,51 @@
       class="bg-white shadow-lg rounded"
     ></canvas>
 
-    <div class="flex items-center justify-center h-12 w-full space-x-8 mt-2">
-      <button
-        class="bg-gray-200 rounded px-4 py-1 font-bold shadow-lg"
-        @click="drawRect"
-      >
-        Add Rectangle
-      </button>
+    <div class="flex w-[600px] mt-2">
+      <div class="w-2/4 flex justify-center items-center">
+        <button
+          class="bg-gray-200 rounded px-4 py-1 font-bold shadow-lg"
+          @click="start()"
+        >
+          {{ canvasStart ? 'Reset Rectangle' : 'Add Rectangle' }}
+        </button>
+      </div>
 
-      <div class="flex space-x-2">
-        <button class="bg-gray-200 rounded px-4 py-1 font-bold shadow-lg w-12">
-          -
-        </button>
-        <button class="bg-gray-200 rounded px-4 py-1 font-bold shadow-lg w-12">
-          +
-        </button>
+      <div class="w-2/4 flex justify-center">
+        <div>
+          <div class="flex items-center space-x-2">
+            <h2 class="font-bold text-xl mr-2">Width:</h2>
+
+            <button
+              class="bg-gray-200 rounded px-4 py-1 font-bold shadow-lg w-12"
+              @click="subWidth"
+            >
+              -
+            </button>
+            <button
+              class="bg-gray-200 rounded px-4 py-1 font-bold shadow-lg w-12"
+              @click="addWidth"
+            >
+              +
+            </button>
+          </div>
+
+          <div class="flex items-center space-x-2 mt-4">
+            <h2 class="font-bold text-xl mr-2">Height:</h2>
+            <button
+              class="bg-gray-200 rounded px-4 py-1 font-bold shadow-lg w-12"
+              @click="subHeight"
+            >
+              -
+            </button>
+            <button
+              class="bg-gray-200 rounded px-4 py-1 font-bold shadow-lg w-12"
+              @click="addHeight"
+            >
+              +
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -45,36 +75,58 @@ export default {
       rectWidth: 100,
       rectHeight: 100,
       zoom: false,
+      canvasStart: false,
     }
   },
   mounted() {
     this.ctx = this.$refs.canvas.getContext('2d')
   },
   methods: {
+    start() {
+      this.rectWidth = 100
+      this.rectHeight = 100
+      this.drawRect()
+    },
     drawRect() {
       // Clear Canvas
+      this.canvasStart = true
       this.ctx.clearRect(
         0,
         0,
-        // this.$refs.canvas.width,
-        // this.$refs.canvas.height
-        600,
-        600
+        this.$refs.canvas.width,
+        this.$refs.canvas.height
+        // 600,
+        // 600
       )
 
       // Draw Rect
-      // draw rect
       this.ctx.beginPath()
       this.ctx.rect(20, 20, this.rectWidth, this.rectHeight)
       this.ctx.stroke()
     },
     addWidth() {
-      this.rectWidth += 10
-      this.drawRect()
+      if (this.canvasStart) {
+        this.rectWidth += 10
+        this.drawRect()
+      }
     },
     subWidth() {
-      this.rectWidth -= 10
-      this.drawRect()
+      if (this.canvasStart) {
+        this.rectWidth -= 10
+        this.drawRect()
+      }
+    },
+    addHeight() {
+      if (this.canvasStart) {
+        this.rectHeight += 10
+        this.drawRect()
+      }
+    },
+    subHeight() {
+      if (this.canvasStart) {
+        this.rectHeight -= 10
+        this.drawRect()
+      }
     },
   },
 }
