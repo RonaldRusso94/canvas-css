@@ -12,9 +12,9 @@
       <li class="transform hover:scale-105 duration-300 ease-in-out">
         <nuxt-link to="/dynamic">Vue Canvas</nuxt-link>
       </li>
-      <!-- <li class="transform hover:scale-105 duration-300 ease-in-out">
+      <li class="transform hover:scale-105 duration-300 ease-in-out">
         <nuxt-link to="/animation">Animation</nuxt-link>
-      </li> -->
+      </li>
     </ul>
   </div>
 </template>

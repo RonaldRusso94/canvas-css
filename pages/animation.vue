@@ -24,9 +24,13 @@ export default {
   mounted() {
     this.ctx = this.$refs.canvas.getContext('2d')
     // const ctx = this.ctx
-
     // Animation 1
-    function drawCircle() {
+
+    this.drawCircle()
+    this.update()
+  },
+  methods: {
+    drawCircle() {
       this.ctx.beginPath()
       this.ctx.arc(
         this.circle.x,
@@ -37,9 +41,23 @@ export default {
       )
       this.ctx.filStyle = 'purple'
       this.ctx.fill()
-    }
+    },
+    update() {
+      this.ctx.clearRect(
+        0,
+        0,
+        this.$refs.canvas.width,
+        this.$refs.canvas.height
+      )
+      this.drawCircle()
 
-    drawCircle()
+      // change position
+      this.circle.x += this.circle.dx
+      this.circle.y += this.circle.dy
+
+      requestAnimationFrame(this.update)
+      // console.log(123)
+    },
   },
 }
 </script>
